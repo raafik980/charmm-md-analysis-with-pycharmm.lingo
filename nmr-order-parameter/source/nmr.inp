@@ -1,0 +1,50 @@
+* Protein analysis
+*
+
+bomlev -2
+
+! Read topology file
+! ------------------
+OPEN unit 1 read card name ../../toppar_dir/top_all27_prot_na_mod.rtf_rs
+READ rtf card unit 1
+CLOSe unit 1
+
+! Read parameter file
+! -------------------
+OPEN unit 1 read card name ../../toppar_dir/par_all27_prot_na_mod.prm_rs
+READ para card unit 1
+CLOSe unit 1
+
+
+! Read psf and coordinates and calculate RMSD between starting and target structures
+! ----------------------------------------------------------------------------------
+OPEN unit 1 read card name wt_rs_setup_1_nowater_noadps_nmr.psf
+READ psf card unit 1
+CLOSe unit 1
+
+
+OPEN unit 1 read card name wt_rs_setup_1_nowater_noadps_nmr.crd
+READ COORd card unit 1
+CLOSe unit 1
+! define some commonly used selections
+!--------------------------------------
+define prot sele segid 1AKE end
+
+
+define ligand sele (segid ADPB .or. segid ADPA ) .and. (.not. hydrogen) end
+define heavy sele segid 1AKE .and. (.not. hydrogen) end
+define backbone sele type N .or. type CA .or. type C .or. type HN end
+
+open unit 21 write form name nh.dat
+open unit 62 read unform name traj_merged_nmr.dcd ! we normally use a traj. where rotation/translation has been removed
+TRAJectory QUERy UNIT 62
+
+set tmx1 3.0
+NMR 
+reset
+rtimes sele atom * * N end sele atom * * HN end 
+dyna firstu 62 nunit 1 begin 1 stop 30000 skip 1  -
+tmax @TMX1 cut 2.0 ilist 21 dsigma -160.0 C(t) 
+end
+
+stop
