@@ -1,0 +1,16 @@
+* NMR Order Parameter Calculation       !!Stream File Title
+*                                                       !! Syntax Requirement
+                                                        !! Blank line, Syntax Requirement    
+NMR                                                     !! NMR module Start    
+RESEt                                                   !! Reset NMR module
+RTIMes sele atom * * N end sele atom * * HN end         !! Select the atoms to calculate the order parameter
+DYNA firstu 62 -                                        !! unit number to read from (same as dcd unit)
+     nunit 1 -                                          !! number of units to read
+     begin 1 -                                          !! first frame to read
+     stop 1124 -                                        !! last frame to read
+     skip 1 -                                           !! read every skip frames
+     tmax 3.0 -                                         !! maximum time for correlation function
+     cut 2.0 -                                          !! cut-off for correlation function
+     ilist 21 -                                         !! unit number to write to (same as outdat unit)
+     dsigma -160.0 C(t) !                               !! correlation function
+END                                                     !! End of NMR module ! More option can be seen from the documentation
