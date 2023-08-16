@@ -1,0 +1,21 @@
+*title
+*
+
+stream ../assets/toppar.str
+open read unit 10 card name ../assets/traj.psf
+read psf  unit 10 card
+
+open unit 62 read unform name ../assets/traj.dcd
+TRAJectory QUERy UNIT 62
+
+! this could be initially read crd as well, (wmain coord array)
+COOR DYNA FIRSTU 62 NUNIT 1 BEGIN 1 SKIP 1 STOP 1124  SELECT ALL END ORIENT SELECT ALL END
+
+
+VIBRAN  NMODE 50
+QUASI NADD 20 firstu 62 nunit 1 SELECT type CA end notp
+
+OPEN WRITE UNIT 21 CARD NAME norm.dat
+write norm unit 21 card
+
+stop
