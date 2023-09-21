@@ -1,0 +1,12 @@
+* Helicity Calculation             !! * TITLE      : SYNTAX REQUIRED FOR STREAM
+*                                                       !! *            :SYNTAX REQUIRED FOR STREAM
+                                                        !! <EMPTY_LINE> : SYNTAX REQUIRED FOR STREAM  
+CORREL MAXTIME 300000                                   !! CORREL START: MAXTIME SHOULD BE MORE THAN THE ACTUAL NUMBER OF SNAPSHOTS IN DCD 
+    ENTER V1 HELIX SELECT SEGID PROA -
+    .AND. ( RESID 161:173 ) - 
+    .AND. ( atom * * O .or. atom * * C .or. atom * * CA .or. atom * * N ) END                       !!
+    TRAJ FIRSTU 62 NUNIT 1 BEGIN 1 ! STOP 1124 SKIP 1       !!
+    WRITE V1 DUMB TIME UNIT 21                          !!
+END                                                     !! CORREL END  
+
+return
