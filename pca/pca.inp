@@ -8,15 +8,36 @@ read psf  unit 10 card
 open unit 62 read unform name ../assets/traj.dcd
 TRAJectory QUERy UNIT 62
 
-! this could be initially read crd as well, (wmain coord array)
-COOR DYNA FIRSTU 62 NUNIT 1 BEGIN 1 SKIP 1 STOP 1124  SELECT ALL END ORIENT SELECT ALL END
+COOR DYNA - 
+FIRSTU 62 -
+NUNIT 1 -
+BEGIN 1 -
+SKIP 1 -
+STOP 1124  -
+SELECT ALL END -
+ORIENT SELECT ALL END
 
 
-VIBRAN  NMODE 50
-QUASI NADD 20 firstu 62 nunit 1 SELECT type CA end notp
+VIBRAN   NMODE 50
+QUASI -
+NADD 641 -     ! skip 3*NATOM-20 modes
+NFREQ 1 -     ! take 2 modes
+FIRSTU 62 -
+NUNIT 1 -
+BEGIN 1 -
+SKIP 1 -
+STOP 1124  -
+SELECT TYPE CA END -
+AUTO -
+NORM -
+NOTP
 
-OPEN WRITE UNIT 21 CARD NAME norm.dat
-write norm unit 21 card
+PROJECT TRAJ NUNIT 1 FIRSTU 62 BEGIN 1 LAST 1124 NOMASS WRITE WUNIT 21 FILE SPIRAL
+
+!PROJECT MODE 642 
+
+!write NORM mode 1 unit 21 card
+END
 
 
 stop
