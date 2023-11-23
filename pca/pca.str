@@ -1,0 +1,29 @@
+* NMR Order Parameter Calculation       
+*
+
+! this could be initially read crd as well, (wmain coord array)
+
+COOR DYNA - 
+FIRSTU 62 -
+NUNIT 1 -
+BEGIN 1 -
+SKIP 1 -
+STOP 1124  -
+SELECT ALL END -
+ORIENT SELECT ALL END
+
+
+VIBRAN NMODE 50
+QUASI -
+NADD 25 -     ! skip first NADD modes
+NFREQ 1 -     ! take 2 modes
+FIRSTU 62 -
+NUNIT 1 -
+SELECT TYPE CA END -
+NORM -
+NOTP
+
+write NORM MODE 1 unit 21 card
+END
+
+RETURN

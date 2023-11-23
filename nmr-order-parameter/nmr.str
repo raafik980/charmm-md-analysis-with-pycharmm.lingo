@@ -14,3 +14,9 @@ DYNA firstu 62 -                                        !! unit number to read f
      ilist 21 -                                         !! unit number to write to (same as outdat unit)
      dsigma -160.0 C(t) !                               !! correlation function
 END                                                     !! End of NMR module ! More option can be seen from the documentation
+
+
+OPEN WRITE UNIT 21 CARD NAME norm.dat
+write norm unit 21 card
+
+RETURN
