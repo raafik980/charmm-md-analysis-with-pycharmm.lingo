@@ -18,4 +18,5 @@ QUASI NADD 20 firstu 62 nunit 1 SELECT type CA end notp
 OPEN WRITE UNIT 21 CARD NAME norm.dat
 write norm unit 21 card
 
+
 stop
